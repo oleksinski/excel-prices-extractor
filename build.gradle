@@ -1,0 +1,36 @@
+group 'com.wteam.horeca'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def springBootVersion = '1.5.10.RELEASE'
+    def springFrameworkVersion = '5.0.3.RELEASE'
+    def apachePoiVersion = '3.17'
+
+    compile 'org.apache.poi:poi:' + apachePoiVersion
+    compile 'org.apache.poi:poi-ooxml:' + apachePoiVersion
+    //compile 'org.springframework:spring-context:' + springFrameworkVersion
+    compile 'org.springframework.boot:spring-boot-starter:' + springBootVersion
+    compile 'org.springframework.boot:spring-boot-configuration-processor:' + springBootVersion
+    compile 'org.projectlombok:lombok:1.16.20'
+    compile 'com.google.guava:guava:24.0-jre'
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    //compile 'org.slf4j:slf4j-simple:1.7.25'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile 'javax.validation:validation-api:2.0.1.Final'
+    compile 'org.hibernate:hibernate-validator:6.0.7.Final'
+
+    testCompile 'junit:junit:4.12'
+
+    compileClasspath 'org.springframework.boot:spring-boot-gradle-plugin' + springBootVersion
+}
+
+compileJava.dependsOn(processResources)

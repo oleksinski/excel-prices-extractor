@@ -1,0 +1,68 @@
+distributors:
+  configuration:
+    - displayName: "OOO Алматерра"
+      sheetTitle: "основной прайс"
+      markers:
+        - row: 1
+          column: A
+          text: "OOO Алматерра"
+        - row: 2
+          column: A
+          text: "штрих-код"
+      firstContentRow: 4
+      firstContentColumn: A
+      columnSpecification:
+        id: A
+        barcode: B
+        name: C
+        description: D
+        vendor: E
+        country:
+        region:
+        cellar:
+        year: F
+        date:
+        color: G
+        sweetness: H
+        soilType:
+        vintage:
+        ranking:
+        grapeType:
+        capacity: I
+        alcohol: J
+        klass: K
+        stock:
+        price: L
+#    - displayName: "OOO Алматерра"
+#      sheetTitle: "основной прайс"
+#      markers:
+#        - row: 1
+#          column: A
+#          text: "OOO Алматерра"
+#        - row: 2
+#          column: A
+#          text: "штрих-код"
+#      firstContentRow: 4
+#      firstContentColumn: A
+#      columnSpecification:
+#        id: A
+#        barcode: B
+#        name: C
+#        description: D
+#        vendor: E
+#        country:
+#        region:
+#        cellar:
+#        year: F
+#        date:
+#        color: G
+#        sweetness: H
+#        soilType:
+#        vintage:
+#        ranking:
+#        grapeType:
+#        capacity: I
+#        alcohol: J
+#        klass: K
+#        stock:
+#        price: L
