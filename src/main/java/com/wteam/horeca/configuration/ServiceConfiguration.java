@@ -1,5 +1,6 @@
 package com.wteam.horeca.configuration;
 
+import com.wteam.horeca.services.ExcelExtractorService;
 import com.wteam.horeca.services.ExcelLaunchService;
 import com.wteam.horeca.services.ExcelWriteService;
 import org.springframework.context.annotation.Bean;
@@ -16,5 +17,10 @@ public class ServiceConfiguration {
     @Bean
     public ExcelLaunchService excelLaunchService() {
         return new ExcelLaunchService();
+    }
+
+    @Bean
+    public ExcelExtractorService excelExtractorService() {
+        return new ExcelExtractorService();
     }
 }

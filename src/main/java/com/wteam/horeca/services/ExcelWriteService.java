@@ -159,14 +159,14 @@ public class ExcelWriteService {
     }
 
     static CellStyle getHeaderCellStyle(Sheet sheet) {
-        return getCellStyle(sheet, 12, true, HorizontalAlignment.CENTER);
+        return getCellStyle(sheet, 12, true, HorizontalAlignment.CENTER, IndexedColors.LIGHT_GREEN);
     }
 
     static CellStyle getContentCellStyle(Sheet sheet) {
-        return getCellStyle(sheet, 11, false, HorizontalAlignment.CENTER);
+        return getCellStyle(sheet, 11, false, HorizontalAlignment.LEFT, null);
     }
 
-    private static CellStyle getCellStyle(Sheet sheet, int fontHeight, boolean bold, HorizontalAlignment alignment) {
+    private static CellStyle getCellStyle(Sheet sheet, int fontHeight, boolean bold, HorizontalAlignment alignment, IndexedColors bgColor) {
         Workbook workbook = sheet.getWorkbook();
 
         CellStyle cellStyle = workbook.createCellStyle();
@@ -178,6 +178,11 @@ public class ExcelWriteService {
 
         cellStyle.setFont(font);
         cellStyle.setAlignment(alignment);
+
+        if (bgColor != null) {
+            cellStyle.setFillBackgroundColor(bgColor.getIndex());
+            cellStyle.setFillPattern(FillPatternType.NO_FILL);
+        }
 
         return cellStyle;
     }

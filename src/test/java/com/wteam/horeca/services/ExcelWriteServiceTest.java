@@ -11,6 +11,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,24 +22,35 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ContextConfiguration(classes = {ExcelPricesExtractorConfiguration.class})
 public class ExcelWriteServiceTest {
 
+    private final static String ID = "12345";
+    private final static String BARCODE = "09876";
+
     @Autowired
     private ExcelWriteService excelWriteService;
 
-    @Test
-    public void shouldCreateWorkbook() {
-        // Test data
+    private Workbook workbook;
+
+    @Before
+    public void init() {
         ExcelSheetRow excelSheetRow = new ExcelSheetRow();
-        excelSheetRow.setId(ExcelColumnHeader.ID.toString());
-        excelSheetRow.setBarcode(ExcelColumnHeader.BARCODE.toString());
+        excelSheetRow.setId(ID);
+        excelSheetRow.setBarcode(BARCODE);
 
         ExcelSheet excelSheet = new ExcelSheet();
         excelSheet.addExcelSheetRows(excelSheetRow);
 
         // Create workbook
-        Workbook workbook = excelWriteService.createWorkbook(excelSheet);
+        workbook = excelWriteService.createWorkbook(excelSheet);
+    }
+
+    @Test
+    public void shouldVerifyCreateWorkbookHeaderRow() {
+
 
         // Verify excel data
         Sheet sheet = workbook.getSheet(ExcelSheet.SHEET_NAME);
+
+        // verify header row
         Row row = sheet.getRow(0);
 
         // verify cell A
@@ -49,14 +61,40 @@ public class ExcelWriteServiceTest {
         Cell bCell = row.getCell(Utils.getExcelColumnIndexByLetter("B"));
         Assert.assertEquals(ExcelColumnHeader.BARCODE.toString(), bCell.getStringCellValue());
 
-        // get header cell style
+        // assert cell styles
         XSSFCellStyle cellStyle = (XSSFCellStyle) ExcelWriteService.getHeaderCellStyle(sheet);
-
-        // verify cell A style
         XSSFCellStyle aCellStyle = (XSSFCellStyle) aCell.getCellStyle();
-        Assert.assertEquals(cellStyle.getAlignmentEnum(), aCellStyle.getAlignmentEnum());
-        Assert.assertEquals(cellStyle.getFont().getBold(), aCellStyle.getFont().getBold());
-        Assert.assertEquals(cellStyle.getFont().getFontHeightInPoints(), aCellStyle.getFont().getFontHeightInPoints());
-        Assert.assertEquals(cellStyle.getFont().getFontName(), aCellStyle.getFont().getFontName());
+        assertCellStyles(cellStyle, aCellStyle);
+    }
+
+    @Test
+    public void shouldVerifyCreateWorkbookContentRow() {
+
+        // Verify excel data
+        Sheet sheet = workbook.getSheet(ExcelSheet.SHEET_NAME);
+
+        // verify header row
+        Row row = sheet.getRow(1);
+
+        // verify cell A
+        Cell aCell = row.getCell(Utils.getExcelColumnIndexByLetter("A"));
+        Assert.assertEquals(ID, aCell.getStringCellValue());
+
+        // verify cell B
+        Cell bCell = row.getCell(Utils.getExcelColumnIndexByLetter("B"));
+        Assert.assertEquals(BARCODE, bCell.getStringCellValue());
+
+        // assert cell styles
+        XSSFCellStyle cellStyle = (XSSFCellStyle) ExcelWriteService.getContentCellStyle(sheet);
+        XSSFCellStyle aCellStyle = (XSSFCellStyle) aCell.getCellStyle();
+        assertCellStyles(cellStyle, aCellStyle);
+    }
+
+    private void assertCellStyles(XSSFCellStyle expectedCellStyle, XSSFCellStyle actualCellStyle) {
+        Assert.assertEquals(expectedCellStyle.getAlignmentEnum(), actualCellStyle.getAlignmentEnum());
+        Assert.assertEquals(expectedCellStyle.getFont().getBold(), actualCellStyle.getFont().getBold());
+        Assert.assertEquals(expectedCellStyle.getFont().getFontHeightInPoints(), actualCellStyle.getFont().getFontHeightInPoints());
+        Assert.assertEquals(expectedCellStyle.getFont().getFontName(), actualCellStyle.getFont().getFontName());
+        Assert.assertEquals(expectedCellStyle.getFillBackgroundColor(), actualCellStyle.getFillBackgroundColor());
     }
 }
