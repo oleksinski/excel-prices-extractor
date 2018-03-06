@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    def springBootVersion = '1.5.10.RELEASE'
+    def springBootVersion = '2.0.0.RELEASE'
     def springFrameworkVersion = '5.0.3.RELEASE'
     def apachePoiVersion = '3.17'
 
@@ -29,6 +29,8 @@ dependencies {
     compile 'org.hibernate:hibernate-validator:6.0.7.Final'
 
     testCompile 'junit:junit:4.12'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
+    testCompile 'org.springframework:spring-test:' + springFrameworkVersion
 
     compileClasspath 'org.springframework.boot:spring-boot-gradle-plugin' + springBootVersion
 }

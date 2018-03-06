@@ -1,6 +1,7 @@
 package com.wteam.horeca.domain;
 
 public enum ExcelColumnHeader {
+    DISTRIBUTOR("DISTRIBUTOR"),
     ID("ID"),
     BARCODE("Barcode"),
     NAME("Name"),
@@ -27,6 +28,15 @@ public enum ExcelColumnHeader {
 
     ExcelColumnHeader(String s) {
         this.s = s;
+    }
+
+    public static ExcelColumnHeader getIdByName(String name) {
+        for (ExcelColumnHeader h : ExcelColumnHeader.values()) {
+            if (h.toString().equals(name)) {
+                return h;
+            }
+        }
+        return null;
     }
 
     @Override

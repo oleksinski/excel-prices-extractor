@@ -2,6 +2,7 @@ package com.wteam.horeca.services;
 
 import com.google.common.base.Strings;
 import com.wteam.horeca.domain.ExcelColumnHeader;
+import com.wteam.horeca.domain.ExcelSheet;
 import com.wteam.horeca.domain.ExcelSheetRow;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
@@ -19,35 +20,39 @@ import java.util.Objects;
 @Slf4j
 public class ExcelWriteService {
 
-    private final static String SHEET_NAME = "Prices";
-
-    public void write(List<ExcelSheetRow> excelSheetRows, String filePath) throws IOException {
-        write(excelSheetRows, new File(filePath));
-    }
-
-    public void write(List<ExcelSheetRow> excelSheetRows, File file) throws IOException {
-
+    public Workbook createWorkbook(ExcelSheet excelSheet) {
         Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet(SHEET_NAME);
+        Sheet sheet = workbook.createSheet(ExcelSheet.SHEET_NAME);
 
         //sheet.setColumnWidth(0, 6000);
         //sheet.setColumnWidth(1, 4000);
+
+        List<ExcelSheetRow> excelSheetRows = excelSheet.getExcelSheetRows();
 
         // write header
         writeRow(excelSheetRows, sheet, sheet.createRow(0), null);
 
         // write data
-        int i = 0;
+        int i = 1;
         for (ExcelSheetRow row : excelSheetRows) {
             writeRow(excelSheetRows, sheet, sheet.createRow(i++), row);
         }
 
-        // Save file to disk
+        return workbook;
+    }
+
+    public void writeToFile(Workbook workbook, String filePath) throws IOException {
+        writeToFile(workbook, new File(filePath));
+    }
+
+    public void writeToFile(Workbook workbook, File file) throws IOException {
         FileOutputStream fileOut = new FileOutputStream(file);
         workbook.write(fileOut);
     }
 
     private void writeRow(List<ExcelSheetRow> excelSheetRows, Sheet sheet, Row row, ExcelSheetRow data) {
+
+        // format cell style
         CellStyle cellStyle;
         if (Objects.isNull(data)) {
             cellStyle = getHeaderCellStyle(sheet);
@@ -67,7 +72,7 @@ public class ExcelWriteService {
         }
     }
 
-    private static String getColumnDataByColumnId(ExcelSheetRow data, ExcelColumnHeader excelColumnHeader) {
+    static String getColumnDataByColumnId(ExcelSheetRow data, ExcelColumnHeader excelColumnHeader) {
         if (Objects.isNull(data)) {
             return null;
         } else {
@@ -143,7 +148,7 @@ public class ExcelWriteService {
         }
     }
 
-    private static String getCellDataOrFallback(ExcelSheetRow data, ExcelColumnHeader excelColumnHeader) {
+    static String getCellDataOrFallback(ExcelSheetRow data, ExcelColumnHeader excelColumnHeader) {
         String value;
         if (Objects.isNull(data)) {
             value = excelColumnHeader.toString();
@@ -153,11 +158,11 @@ public class ExcelWriteService {
         return value;
     }
 
-    private static CellStyle getHeaderCellStyle(Sheet sheet) {
+    static CellStyle getHeaderCellStyle(Sheet sheet) {
         return getCellStyle(sheet, 12, true, HorizontalAlignment.CENTER);
     }
 
-    private static CellStyle getContentCellStyle(Sheet sheet) {
+    static CellStyle getContentCellStyle(Sheet sheet) {
         return getCellStyle(sheet, 11, false, HorizontalAlignment.CENTER);
     }
 

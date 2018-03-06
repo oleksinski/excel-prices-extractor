@@ -15,7 +15,7 @@ public class DistributorProperties {
 
     private String sheetTitle;
 
-    private List<MarkerProperties> markers = new ArrayList<>();
+    private List<DistributorMarker> markers = new ArrayList<>();
 
     @Min(1)
     private int firstContentRow = 0;

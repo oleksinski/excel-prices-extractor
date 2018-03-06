@@ -1,6 +1,6 @@
 package com.wteam.horeca;
 
-import com.wteam.horeca.configuration.ApplicationConfiguration;
+import com.wteam.horeca.configuration.SpringBootConsoleApplicationConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@Import({ApplicationConfiguration.class})
+@Import({SpringBootConsoleApplicationConfiguration.class})
 public class SpringBootConsoleApplication implements CommandLineRunner {
 
     private final ApplicationContext applicationContext;

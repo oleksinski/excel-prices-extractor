@@ -7,7 +7,7 @@ import javax.validation.constraints.Min;
 
 @Data
 @ToString
-public class MarkerProperties {
+public class DistributorMarker {
 
     @Min(1)
     private int row = 0;
