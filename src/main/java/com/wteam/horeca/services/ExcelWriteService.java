@@ -21,13 +21,12 @@ import java.util.Objects;
 public class ExcelWriteService {
 
     public Workbook createWorkbook(ExcelSheet excelSheet) {
+        return createWorkbook(excelSheet.getExcelSheetRows());
+    }
+
+    public Workbook createWorkbook(List<ExcelSheetRow> excelSheetRows) {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet(ExcelSheet.SHEET_NAME);
-
-        //sheet.setColumnWidth(0, 6000);
-        //sheet.setColumnWidth(1, 4000);
-
-        List<ExcelSheetRow> excelSheetRows = excelSheet.getExcelSheetRows();
 
         // write header
         writeRow(excelSheetRows, sheet, sheet.createRow(0), null);

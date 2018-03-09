@@ -5,12 +5,11 @@ distributors:
       markers:
         - row: 1
           column: A
-          text: "OOO Алматерра"
-        - row: 2
+          text: "ООО \"АЛМАТЕРРА\""
+        - row: 3
           column: A
           text: "штрих-код"
       firstContentRow: 4
-      firstContentColumn: A
       columnSpecification:
         id: A
         barcode: B
@@ -43,7 +42,6 @@ distributors:
 #          column: A
 #          text: "штрих-код"
 #      firstContentRow: 4
-#      firstContentColumn: A
 #      columnSpecification:
 #        id: A
 #        barcode: B

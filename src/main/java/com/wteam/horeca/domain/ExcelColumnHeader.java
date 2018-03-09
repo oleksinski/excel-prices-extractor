@@ -1,7 +1,7 @@
 package com.wteam.horeca.domain;
 
 public enum ExcelColumnHeader {
-    DISTRIBUTOR("DISTRIBUTOR"),
+    DISTRIBUTOR("Distributor"),
     ID("ID"),
     BARCODE("Barcode"),
     NAME("Name"),

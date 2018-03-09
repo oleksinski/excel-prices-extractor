@@ -20,7 +20,11 @@ public class SpringBootConsoleApplicationConfiguration implements ApplicationLis
     }
 
     @Bean
-    public ExcelPricesExtractor application(ExcelExtractorService excelExtractorService, ExcelWriteService excelWriteService, ExcelLaunchService excelLaunchService) {
-        return new ExcelPricesExtractor(excelExtractorService, excelWriteService, excelLaunchService);
+    public ExcelPricesExtractor application() {
+        return new ExcelPricesExtractor();
     }
+//    @Bean
+//    public ExcelPricesExtractor application(ExcelExtractorService excelExtractorService, ExcelWriteService excelWriteService, ExcelLaunchService excelLaunchService) {
+//        return new ExcelPricesExtractor(excelExtractorService, excelWriteService, excelLaunchService);
+//    }
 }

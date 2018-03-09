@@ -26,6 +26,7 @@ import java.io.IOException;
 public class ExcelPricesExtractorTest {
 
     private final static String BASE_PATH = "/Users/olka/Projects/excel-prices-extractor";
+
     @Autowired
     private ExcelWriteService excelWriteService;
 
@@ -63,19 +64,19 @@ public class ExcelPricesExtractorTest {
     @Test
     @Ignore
     public void shouldTestExtractorService() {
-        String dirPath = BASE_PATH + "/test/resources/prices/";
-        String[] searchStrings = new String[]{};
-        ExcelSheet excelSheet = excelExtractorService.extract(dirPath, searchStrings);
+//        String dirPath = BASE_PATH + "/test/resources/prices/";
+//        String[] searchStrings = new String[]{};
+//        ExcelSheet excelSheet = excelExtractorService.extract(dirPath, searchStrings);
     }
 
     @Test
     @Ignore
     public void test() throws IOException, InvalidFormatException {
 
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("prices/Almaterra.xlsx").getFile());
-        Workbook workbook = WorkbookFactory.create(file);
-        Sheet sheet = workbook.getSheetAt(0);
-        Assert.assertEquals("", "");
+//        ClassLoader classLoader = getClass().getClassLoader();
+//        File file = new File(classLoader.getResource("prices/Almaterra.xlsx").getFile());
+//        Workbook workbook = WorkbookFactory.create(file);
+//        Sheet sheet = workbook.getSheetAt(0);
+//        Assert.assertEquals("", "");
     }
 }

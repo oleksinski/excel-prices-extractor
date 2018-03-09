@@ -1,5 +1,6 @@
 package com.wteam.horeca.configuration;
 
+import com.wteam.horeca.services.ExcelDistributorDetectorService;
 import com.wteam.horeca.services.ExcelExtractorService;
 import com.wteam.horeca.services.ExcelLaunchService;
 import com.wteam.horeca.services.ExcelWriteService;
@@ -22,5 +23,10 @@ public class ServiceConfiguration {
     @Bean
     public ExcelExtractorService excelExtractorService() {
         return new ExcelExtractorService();
+    }
+
+    @Bean
+    public ExcelDistributorDetectorService excelDistributorDetectorService() {
+        return new ExcelDistributorDetectorService();
     }
 }

@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 @Builder(toBuilder = true)
 @ToString
 public class ExcelSheetRow {
+    private String distributor;
     private String id; //
     private String barcode; //
     private String name; // = appellation

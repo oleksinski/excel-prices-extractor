@@ -20,7 +20,5 @@ public class DistributorProperties {
     @Min(1)
     private int firstContentRow = 0;
 
-    private String firstContentColumn = "A";
-
     private ExcelSheetRow columnSpecification;
 }
