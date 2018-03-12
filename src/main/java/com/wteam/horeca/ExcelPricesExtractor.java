@@ -1,5 +1,6 @@
 package com.wteam.horeca;
 
+import com.wteam.horeca.domain.DistributorMapping;
 import com.wteam.horeca.domain.DistributorProperties;
 import com.wteam.horeca.domain.ExcelSheet;
 import com.wteam.horeca.domain.ExcelSheetRow;
@@ -13,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * http://poi.apache.org/spreadsheet/quick-guide.html
@@ -39,13 +43,15 @@ public class ExcelPricesExtractor {
 
     public void start(File[] files, File output, List<String> searchItems) throws IOException {
 
-        Map<Workbook, DistributorProperties> workBookToDistributorPropertiesMap = excelDistributorDetectorService.detect(files);
+        List<DistributorMapping> distributorMappings = excelDistributorDetectorService.detect(files);
 
         filesIgnored = excelDistributorDetectorService.getFilesIgnored();
 
-        List<ExcelSheetRow> excelSheetRows = excelExtractorService.extract(workBookToDistributorPropertiesMap, searchItems);
+        List<ExcelSheetRow> excelSheetRows = excelExtractorService.extract(distributorMappings, searchItems);
 
-        Workbook workbook = excelWriteService.createWorkbook(excelSheetRows);
+        String sheetName = searchItems.stream().reduce((s1, s2) -> s1 + ", " + s2).orElse(ExcelSheet.SHEET_NAME);
+
+        Workbook workbook = excelWriteService.createWorkbook(excelSheetRows, sheetName);
 
         excelWriteService.writeToFile(workbook, output);
 

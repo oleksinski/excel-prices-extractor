@@ -23,18 +23,11 @@ public class SpringBootConsoleApplication implements ApplicationRunner {
     private final static String ARG_SEARCH = "search";
     private final static String ARG_OUT = "output";
 
-    //private final ApplicationContext applicationContext;
-
     @Autowired
     private ExcelPricesExtractor excelPricesExtractor;
 
     @Autowired
     private MessageSourceService messageSource;
-
-//    @Autowired
-//    public SpringBootConsoleApplication(ApplicationContext applicationContext) {
-//        this.applicationContext = applicationContext;
-//    }
 
     public static void main(String[] args) throws Exception {
         new SpringApplicationBuilder(SpringBootConsoleApplication.class)

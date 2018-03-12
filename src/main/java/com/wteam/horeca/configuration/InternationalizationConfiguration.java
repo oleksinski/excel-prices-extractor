@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class InternationalizationConfiguration {
 
     @Bean
-    public MessageSourceService messageSource () {
+    public MessageSourceService messageSource() {
         return new MessageSourceServiceImpl();
     }
 }

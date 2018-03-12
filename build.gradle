@@ -1,7 +1,22 @@
 group 'com.wteam.horeca'
 version '1.0-SNAPSHOT'
 
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url 'http://repo.spring.io/libs-release'
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RELEASE")
+    }
+}
+
 apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -31,8 +46,19 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.springframework.boot:spring-boot-starter-test:' + springBootVersion
     testCompile 'org.springframework:spring-test:' + springFrameworkVersion
-
-    compileClasspath 'org.springframework.boot:spring-boot-gradle-plugin' + springBootVersion
 }
 
 compileJava.dependsOn(processResources)
+
+jar {
+    enabled = true
+    manifest {
+        attributes(
+                'Main-Class': 'com.wteam.horeca.SpringBootConsoleApplication'
+        )
+    }
+    baseName = project.name
+    doFirst {
+        from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
+    }
+}

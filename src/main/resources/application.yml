@@ -2,13 +2,10 @@ distributors:
   configuration:
     - displayName: "OOO Алматерра"
       sheetTitle: "основной прайс"
+      sheetIndex: 0
       markers:
-        - row: 1
-          column: A
-          text: "ООО \"АЛМАТЕРРА\""
-        - row: 3
-          column: A
-          text: "штрих-код"
+        - marker: "A1:ООО \"АЛМАТЕРРА\""
+        - marker: "A3:штрих-код"
       firstContentRow: 4
       columnSpecification:
         id: A
@@ -16,51 +13,109 @@ distributors:
         name: C
         description: D
         vendor: E
-        country:
-        region:
-        cellar:
         year: F
-        date:
         color: G
         sweetness: H
-        soilType:
-        vintage:
-        ranking:
-        grapeType:
         capacity: I
         alcohol: J
         klass: K
-        stock:
         price: L
-#    - displayName: "OOO Алматерра"
-#      sheetTitle: "основной прайс"
-#      markers:
-#        - row: 1
-#          column: A
-#          text: "OOO Алматерра"
-#        - row: 2
-#          column: A
-#          text: "штрих-код"
-#      firstContentRow: 4
-#      columnSpecification:
-#        id: A
-#        barcode: B
-#        name: C
-#        description: D
-#        vendor: E
-#        country:
-#        region:
-#        cellar:
-#        year: F
-#        date:
-#        color: G
-#        sweetness: H
-#        soilType:
-#        vintage:
-#        ranking:
-#        grapeType:
-#        capacity: I
-#        alcohol: J
-#        klass: K
-#        stock:
-#        price: L
+    - displayName: "Баядера"
+      sheetTitle: ""
+      sheetIndex: 0
+      markers:
+        - marker: "B3:Номенклатура"
+        - marker: "C3:HoReCa"
+      firstContentRow: 5
+      columnSpecification:
+        description: B
+        price: C
+    - displayName: "Провайн"
+      sheetTitle: ""
+      sheetIndex: 0
+      markers:
+        - marker: "A1:Item"
+        - marker: "B1:Страна"
+        - marker: "C1:Item Product Type"
+      firstContentRow: 2
+      columnSpecification:
+        id: A
+        name: I
+        description: C
+        vendor: H
+        country: B
+        date: M
+        color: E
+        klass: G
+        stock: L
+        price: J
+    - displayName: "Ришбур"
+      sheetTitle: "price"
+      sheetIndex: 0
+      markers:
+        - marker: "A1:К О Д"
+        - marker: "C1:N A M E"
+        - marker: "E1:Р І К"
+      firstContentRow: 4
+      columnSpecification:
+        id: A
+        name: C
+        description: D
+        year: E
+        sweetness: G
+        capacity: F
+        alcohol: H
+        price: I
+    - displayName: "Вайнмарт"
+      sheetTitle: ""
+      sheetIndex: 0
+      markers:
+        - marker: "G2:ТОВ \"ВАЙНМАРТ\""
+        - marker: "M7:Сорт винограда"
+      firstContentRow: 11
+      columnSpecification:
+        id: J
+        name: L
+        description:
+        vendor: K
+        country: G
+        region: H
+        year: P
+        color: R
+        sweetness: Q
+        grapeType: M
+        capacity: N
+        alcohol:
+        klass: O
+        price: S
+
+### Distributor configuration template ###
+#- displayName: "Distributor name"
+#  sheetTitle: "Main price"
+#  sheetIndex: 0
+#  markers:
+#    - marker: "A1:text"
+#    - marker: "B2:text"
+#  firstContentRow: 4
+#  columnSpecification:
+#    id:
+#    barcode:
+#    name:
+#    description:
+#    vendor:
+#    country:
+#    region:
+#    cellar:
+#    year:
+#    date:
+#    color:
+#    sweetness:
+#    soilType:
+#    vintage:
+#    ranking:
+#    grapeType:
+#    capacity:
+#    alcohol:
+#    klass:
+#    stock:
+#    price:

@@ -1,5 +1,6 @@
 package com.wteam.horeca.services;
 
+import com.wteam.horeca.domain.DistributorMapping;
 import com.wteam.horeca.domain.DistributorMarker;
 import com.wteam.horeca.domain.DistributorProperties;
 import com.wteam.horeca.domain.DistributorsProperties;
@@ -27,25 +28,25 @@ public class ExcelDistributorDetectorService {
         return filesIgnored;
     }
 
-    public Map<Workbook, DistributorProperties> detect(File[] files) {
+    public List<DistributorMapping> detect(File[] files) {
 
-        Map<Workbook, DistributorProperties> result = new HashMap<>();
+        List<DistributorMapping> distributorMappings = new ArrayList<>();
 
         List<DistributorProperties> configuration = distributorsProperties.getConfiguration();
 
-        for (File file: files) {
+        for (File file : files) {
 
-            for (DistributorProperties properties: configuration) {
+            for (DistributorProperties properties : configuration) {
                 try {
-                    Workbook wb = WorkbookFactory.create(file);
-                    Sheet sheet = wb.getSheet(properties.getSheetTitle());
+                    Workbook workbook = WorkbookFactory.create(file);
+                    Sheet sheet = Utils.getSheet(workbook, properties.getSheetTitle(), properties.getSheetIndex());
 
                     if (Objects.isNull(sheet)) {
-                        wb.close();
+                        workbook.close();
                         filesIgnored.add(file);
                     } else {
                         List<DistributorMarker> markers = properties.getMarkers();
-                        for (DistributorMarker marker: markers) {
+                        for (DistributorMarker marker : markers) {
                             int rowNumber = marker.getRow();
                             if (rowNumber > 0) {
                                 rowNumber--;
@@ -55,7 +56,7 @@ public class ExcelDistributorDetectorService {
                             String cellValue = cell.getStringCellValue();
                             String markerValue = marker.getText();
                             if (!cellValue.contains(markerValue)) {
-                                wb.close();
+                                workbook.close();
                                 filesIgnored.add(file);
                                 break;
                             } else {
@@ -63,7 +64,8 @@ public class ExcelDistributorDetectorService {
                             }
                         }
                         if (!filesIgnored.contains(file)) {
-                            result.put(wb, properties);
+                            distributorMappings.add(new DistributorMapping(file, workbook, properties));
+                            break;
                         }
                     }
 
@@ -73,6 +75,6 @@ public class ExcelDistributorDetectorService {
             }
         }
 
-        return result;
+        return distributorMappings;
     }
 }

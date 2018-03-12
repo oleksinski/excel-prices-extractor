@@ -1,5 +1,6 @@
 package com.wteam.horeca.utils;
 
+import com.wteam.horeca.domain.ExcelCellReference;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
@@ -26,7 +27,7 @@ public class UtilsTest {
         File[] files = Utils.getFilesInDirectory(pricesTestDirectory.getFile().getAbsolutePath(), ".xls");
 
         Assert.assertEquals(1, files.length);
-        Assert.assertEquals("PriceRaise.xls", files[0].getName());
+        Assert.assertEquals("Winemart.xls", files[0].getName());
     }
 
     @Test
@@ -35,9 +36,9 @@ public class UtilsTest {
 
         Assert.assertEquals(4, files.length);
         Assert.assertEquals("Almaterra.xlsx", files[0].getName());
-        Assert.assertEquals("BayaderaWine.xlsx", files[1].getName());
+        Assert.assertEquals("Bayadera.xlsx", files[1].getName());
         Assert.assertEquals("Prowine.xlsx", files[2].getName());
-        Assert.assertEquals("RishburJan2018.xlsx", files[3].getName());
+        Assert.assertEquals("Rishbur.xlsx", files[3].getName());
     }
 
     @Test
@@ -46,9 +47,15 @@ public class UtilsTest {
 
         Assert.assertEquals(5, files.length);
         Assert.assertEquals("Almaterra.xlsx", files[0].getName());
-        Assert.assertEquals("BayaderaWine.xlsx", files[1].getName());
-        Assert.assertEquals("PriceRaise.xls", files[2].getName());
-        Assert.assertEquals("Prowine.xlsx", files[3].getName());
-        Assert.assertEquals("RishburJan2018.xlsx", files[4].getName());
+        Assert.assertEquals("Bayadera.xlsx", files[1].getName());
+        Assert.assertEquals("Prowine.xlsx", files[2].getName());
+        Assert.assertEquals("Rishbur.xlsx", files[3].getName());
+        Assert.assertEquals("Winemart.xls", files[4].getName());
+    }
+
+    @Test
+    public void shouldGetExcelCellReference() {
+        Assert.assertEquals(new ExcelCellReference("A", 1), Utils.getExcelCellReference("A1"));
+        Assert.assertEquals(new ExcelCellReference("AB", 12), Utils.getExcelCellReference("AB12"));
     }
 }

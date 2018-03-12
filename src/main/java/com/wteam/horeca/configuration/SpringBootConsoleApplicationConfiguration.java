@@ -1,9 +1,6 @@
 package com.wteam.horeca.configuration;
 
 import com.wteam.horeca.ExcelPricesExtractor;
-import com.wteam.horeca.services.ExcelExtractorService;
-import com.wteam.horeca.services.ExcelLaunchService;
-import com.wteam.horeca.services.ExcelWriteService;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;

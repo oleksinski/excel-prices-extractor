@@ -16,17 +16,6 @@ public class ExcelSheet {
 
     private List<ExcelSheetRow> excelSheetRows;
 
-    public void addExcelSheetRows(ExcelSheetRow excelSheetRow) {
-        excelSheetRows = getExcelSheetRows();
-        if (!excelSheetRows.contains(excelSheetRow)) {
-            excelSheetRows.add(excelSheetRow);
-        }
-    }
-
-    public List<ExcelSheetRow> getExcelSheetRows() {
-        return excelSheetRows != null ? excelSheetRows : new CopyOnWriteArrayList<>(); // To avoid null pointer exceptions.
-    }
-
     public static ExcelSheet of(ExcelSheet entity) {
         if (entity == null) {
             return null;
@@ -41,5 +30,16 @@ public class ExcelSheet {
             return new CopyOnWriteArrayList<>();
         }
         return new CopyOnWriteArrayList<>(entities);
+    }
+
+    public void addExcelSheetRows(ExcelSheetRow excelSheetRow) {
+        excelSheetRows = getExcelSheetRows();
+        if (!excelSheetRows.contains(excelSheetRow)) {
+            excelSheetRows.add(excelSheetRow);
+        }
+    }
+
+    public List<ExcelSheetRow> getExcelSheetRows() {
+        return excelSheetRows != null ? excelSheetRows : new CopyOnWriteArrayList<>(); // To avoid null pointer exceptions.
     }
 }
