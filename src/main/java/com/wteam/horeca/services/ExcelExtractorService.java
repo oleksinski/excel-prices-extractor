@@ -23,7 +23,7 @@ public class ExcelExtractorService {
     public List<ExcelSheetRow> extract(List<DistributorMapping> distributorMappings, List<String> searchItems) {
         List<ExcelSheetRow> result = new ArrayList<>();
 
-        for(DistributorMapping distributorMapping: distributorMappings) {
+        for (DistributorMapping distributorMapping : distributorMappings) {
             result.addAll(extract(
                     distributorMapping.getWorkbook(),
                     distributorMapping.getDistributorProperties(),

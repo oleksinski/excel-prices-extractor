@@ -6,11 +6,7 @@ import com.wteam.horeca.domain.ExcelSheetRow;
 import com.wteam.horeca.services.ExcelExtractorService;
 import com.wteam.horeca.services.ExcelLaunchService;
 import com.wteam.horeca.services.ExcelWriteService;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,8 +44,7 @@ public class ExcelPricesExtractorTest {
         excelSheet.addExcelSheetRows(excelSheetRow);
 
         // Define output file
-        //File file = File.createTempFile("workbook", ".xlsx");
-        File file = new File(BASE_PATH + "/out/workbook.xlsx");
+        File file = new File(BASE_PATH + "/target/workbook.xlsx");
 
         // Create workbook
         Workbook workbook = excelWriteService.createWorkbook(excelSheet);
@@ -61,22 +56,4 @@ public class ExcelPricesExtractorTest {
         excelLaunchService.execute(file);
     }
 
-    @Test
-    @Ignore
-    public void shouldTestExtractorService() {
-//        String dirPath = BASE_PATH + "/test/resources/prices/";
-//        String[] searchStrings = new String[]{};
-//        ExcelSheet excelSheet = excelExtractorService.extract(dirPath, searchStrings);
-    }
-
-    @Test
-    @Ignore
-    public void test() throws IOException, InvalidFormatException {
-
-//        ClassLoader classLoader = getClass().getClassLoader();
-//        File file = new File(classLoader.getResource("prices/Almaterra.xlsx").getFile());
-//        Workbook workbook = WorkbookFactory.create(file);
-//        Sheet sheet = workbook.getSheetAt(0);
-//        Assert.assertEquals("", "");
-    }
 }

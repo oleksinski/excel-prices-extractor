@@ -1,7 +1,6 @@
 package com.wteam.horeca;
 
 import com.wteam.horeca.domain.DistributorMapping;
-import com.wteam.horeca.domain.DistributorProperties;
 import com.wteam.horeca.domain.ExcelSheet;
 import com.wteam.horeca.domain.ExcelSheetRow;
 import com.wteam.horeca.services.ExcelDistributorDetectorService;
@@ -16,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
