@@ -13,15 +13,10 @@ public class SpringBootConsoleApplicationConfiguration implements ApplicationLis
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-
     }
 
     @Bean
     public ExcelPricesExtractor application() {
         return new ExcelPricesExtractor();
     }
-//    @Bean
-//    public ExcelPricesExtractor application(ExcelExtractorService excelExtractorService, ExcelWriteService excelWriteService, ExcelLaunchService excelLaunchService) {
-//        return new ExcelPricesExtractor(excelExtractorService, excelWriteService, excelLaunchService);
-//    }
 }

@@ -29,12 +29,18 @@ public class ExcelDistributorDetectorService {
     }
 
     public List<DistributorMapping> detect(File[] files) {
+        return detect(files, distributorsProperties);
+    }
+
+    public List<DistributorMapping> detect(File[] files, DistributorsProperties distributorsProperties) {
 
         List<DistributorMapping> distributorMappings = new ArrayList<>();
 
         List<DistributorProperties> configuration = distributorsProperties.getConfiguration();
 
         for (File file : files) {
+
+            filesIgnored.add(file);
 
             for (DistributorProperties properties : configuration) {
                 try {
@@ -53,7 +59,7 @@ public class ExcelDistributorDetectorService {
                             }
                             Row row = sheet.getRow(rowNumber);
                             Cell cell = row.getCell(Utils.getExcelColumnIndexByLetter(marker.getColumn()));
-                            String cellValue = cell.getStringCellValue();
+                            String cellValue = Objects.isNull(cell) ? "" : cell.getStringCellValue();
                             String markerValue = marker.getText();
                             if (!cellValue.contains(markerValue)) {
                                 workbook.close();

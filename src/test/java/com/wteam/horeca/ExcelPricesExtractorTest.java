@@ -3,7 +3,6 @@ package com.wteam.horeca;
 import com.wteam.horeca.configuration.ExcelPricesExtractorConfiguration;
 import com.wteam.horeca.domain.ExcelSheet;
 import com.wteam.horeca.domain.ExcelSheetRow;
-import com.wteam.horeca.services.ExcelExtractorService;
 import com.wteam.horeca.services.ExcelLaunchService;
 import com.wteam.horeca.services.ExcelWriteService;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -28,9 +27,6 @@ public class ExcelPricesExtractorTest {
 
     @Autowired
     private ExcelLaunchService excelLaunchService;
-
-    @Autowired
-    private ExcelExtractorService excelExtractorService;
 
     @Test
     @Ignore

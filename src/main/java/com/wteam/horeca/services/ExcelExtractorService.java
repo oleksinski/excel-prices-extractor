@@ -91,7 +91,7 @@ public class ExcelExtractorService {
                 }
             }
 
-            if (Booleans.asList(matched).stream().allMatch(b -> b)) {
+            if (Booleans.asList(matched).stream().allMatch(b -> b) && !Strings.isNullOrEmpty(excelSheetRow.getPrice())) {
                 result.add(excelSheetRow);
             }
         }

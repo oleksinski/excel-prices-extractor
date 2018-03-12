@@ -8,6 +8,9 @@ import org.springframework.core.io.Resource;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UtilsTest {
 
@@ -27,35 +30,44 @@ public class UtilsTest {
         File[] files = Utils.getFilesInDirectory(pricesTestDirectory.getFile().getAbsolutePath(), ".xls");
 
         Assert.assertEquals(1, files.length);
-        Assert.assertEquals("Winemart.xls", files[0].getName());
+        assertXlsFies(files);
     }
 
     @Test
     public void shouldGetFilesInDirectoryWithXlsxExtensions() throws IOException {
         File[] files = Utils.getFilesInDirectory(pricesTestDirectory.getFile().getAbsolutePath(), ".xlsx");
 
-        Assert.assertEquals(4, files.length);
-        Assert.assertEquals("Almaterra.xlsx", files[0].getName());
-        Assert.assertEquals("Bayadera.xlsx", files[1].getName());
-        Assert.assertEquals("Prowine.xlsx", files[2].getName());
-        Assert.assertEquals("Rishbur.xlsx", files[3].getName());
+        Assert.assertEquals(6, files.length);
+        assertXlsxFiles(files);
     }
 
     @Test
     public void shouldGetFilesInDirectoryWithMultipleExtensions() throws IOException {
         File[] files = Utils.getFilesInDirectory(pricesTestDirectory.getFile().getAbsolutePath(), ".xls", ".xlsx");
 
-        Assert.assertEquals(5, files.length);
-        Assert.assertEquals("Almaterra.xlsx", files[0].getName());
-        Assert.assertEquals("Bayadera.xlsx", files[1].getName());
-        Assert.assertEquals("Prowine.xlsx", files[2].getName());
-        Assert.assertEquals("Rishbur.xlsx", files[3].getName());
-        Assert.assertEquals("Winemart.xls", files[4].getName());
+        Assert.assertEquals(7, files.length);
+        assertXlsxFiles(files);
+        assertXlsFies(files);
     }
 
     @Test
     public void shouldGetExcelCellReference() {
         Assert.assertEquals(new ExcelCellReference("A", 1), Utils.getExcelCellReference("A1"));
         Assert.assertEquals(new ExcelCellReference("AB", 12), Utils.getExcelCellReference("AB12"));
+    }
+
+    private void assertXlsxFiles(File[] files) {
+        List<String> fileNames = Arrays.stream(files).map(File::getName).collect(Collectors.toList());
+        Assert.assertTrue(fileNames.contains("Almaterra.xlsx"));
+        Assert.assertTrue(fileNames.contains("Bayadera.xlsx"));
+        Assert.assertTrue(fileNames.contains("Prowine.xlsx"));
+        Assert.assertTrue(fileNames.contains("Rishbur.xlsx"));
+        Assert.assertTrue(fileNames.contains("WinebureauRegular.xlsx"));
+        Assert.assertTrue(fileNames.contains("WinebureauStrong.xlsx"));
+    }
+
+    private void assertXlsFies(File[] files) {
+        List<String> fileNames = Arrays.stream(files).map(File::getName).collect(Collectors.toList());
+        Assert.assertTrue(fileNames.contains("Winemart.xls"));
     }
 }

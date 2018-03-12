@@ -8,8 +8,8 @@ distributors:
         - marker: "A3:штрих-код"
       firstContentRow: 4
       columnSpecification:
-        id: A
-        barcode: B
+        id: B
+        barcode: A
         name: C
         description: D
         vendor: E
@@ -28,7 +28,7 @@ distributors:
         - marker: "C3:HoReCa"
       firstContentRow: 5
       columnSpecification:
-        description: B
+        name: B
         price: C
     - displayName: "Провайн"
       sheetTitle: ""
@@ -88,6 +88,43 @@ distributors:
         alcohol:
         klass: O
         price: S
+    - displayName: "Бюро Вин (крепкая группа)"
+      sheetTitle: "TDSheet"
+      sheetIndex: 0
+      markers:
+        - marker: "D2:БЮРО ВИН"
+        - marker: "B14:М І Ц Н А   Г Р У П А"
+        - marker: "I16:Витримка/Рік"
+      firstContentRow: 20
+      columnSpecification:
+        id: C
+        name: D
+        vendor: B
+        year: I
+        capacity: J
+        alcohol: H
+        klass: G
+        stock: O
+        price: K
+    - displayName: "Бюро Вин"
+      sheetTitle: "TDSheet"
+      sheetIndex: 0
+      markers:
+        - marker: "D2:БЮРО ВИН"
+        - marker: "H14:Класиф."
+        - marker: "K14:Колір"
+      firstContentRow: 20
+      columnSpecification:
+        id: C
+        name: D
+        vendor: B
+        year: J
+        color: K
+        ranking: I
+        capacity: L
+        klass: G
+        stock: Q
+        price: M
 
 ### Distributor configuration template ###
 #- displayName: "Distributor name"
