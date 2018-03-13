@@ -73,9 +73,21 @@ public class ExcelWriteService {
         return cellStyle;
     }
 
-    private static void createCell(Row data, int column, String value, CellStyle cellStyle) {
+    private static void createCell(Row data, int column, String value, CellStyle cellStyle, ExcelColumnHeader excelColumnHeader) {
         Cell cell = data.createCell(column);
-        cell.setCellValue(value);
+
+        if (ExcelColumnHeader.PRICE.equals(excelColumnHeader)
+                || ExcelColumnHeader.STOCK.equals(excelColumnHeader)
+                || ExcelColumnHeader.CAPACITY.equals(excelColumnHeader)
+                || ExcelColumnHeader.ALCOHOL.equals(excelColumnHeader)) {
+            try {
+                cell.setCellValue(Double.parseDouble(value));
+            } catch (NumberFormatException e) {
+                cell.setCellValue(value);
+            }
+        } else {
+            cell.setCellValue(value);
+        }
         cell.setCellStyle(cellStyle);
     }
 
@@ -131,7 +143,7 @@ public class ExcelWriteService {
 
         for (ExcelColumnHeader excelColumnHeader : excelColumnHeaders) {
             if (excelSheetRows.stream().anyMatch(r -> !Strings.isNullOrEmpty(Utils.getColumnDataByColumnId(r, excelColumnHeader)))) {
-                createCell(row, col++, getCellDataOrFallback(data, excelColumnHeader), cellStyle);
+                createCell(row, col++, getCellDataOrFallback(data, excelColumnHeader), cellStyle, excelColumnHeader);
             }
         }
     }

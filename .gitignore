@@ -5,3 +5,5 @@ out/
 *.log
 .gradle
 *.iml
+tools/workbook.xlsx
+tools/excel-prices-extractor-1.0-SNAPSHOT.jar

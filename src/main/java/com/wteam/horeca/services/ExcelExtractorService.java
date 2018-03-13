@@ -75,23 +75,29 @@ public class ExcelExtractorService {
             excelSheetRow.setPrice(extractCellValue(row, columnSpecification.getPrice()));
 
             // perform search
-            boolean[] matched = new boolean[searchItems.size()];
+            if (!searchItems.isEmpty()) {
+                boolean[] matched = new boolean[searchItems.size()];
 
-            ExcelColumnHeader[] excelColumnHeaders = ExcelColumnHeader.values();
+                ExcelColumnHeader[] excelColumnHeaders = ExcelColumnHeader.values();
 
-            for (int j = 0; j < searchItems.size(); j++) {
-                String searchItem = searchItems.get(j);
+                for (int j = 0; j < searchItems.size(); j++) {
+                    String searchItem = searchItems.get(j);
 
-                for (ExcelColumnHeader excelColumnHeader : excelColumnHeaders) {
-                    String cellData = Utils.getColumnDataByColumnId(excelSheetRow, excelColumnHeader);
-                    if (matched(cellData, searchItem)) {
-                        matched[j] = true;
-                        break;
+                    for (ExcelColumnHeader excelColumnHeader : excelColumnHeaders) {
+                        String cellData = Utils.getColumnDataByColumnId(excelSheetRow, excelColumnHeader);
+                        if (matched(cellData, searchItem)) {
+                            matched[j] = true;
+                            break;
+                        }
                     }
+                }
+
+                if (!Booleans.asList(matched).stream().allMatch(b -> b)) {
+                    continue;
                 }
             }
 
-            if (Booleans.asList(matched).stream().allMatch(b -> b) && !Strings.isNullOrEmpty(excelSheetRow.getPrice())) {
+            if (!Strings.isNullOrEmpty(excelSheetRow.getPrice())) {
                 result.add(excelSheetRow);
             }
         }

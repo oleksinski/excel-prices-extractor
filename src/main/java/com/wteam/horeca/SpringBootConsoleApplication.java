@@ -45,20 +45,20 @@ public class SpringBootConsoleApplication implements ApplicationRunner {
      */
     public void run(ApplicationArguments args) throws Exception {
 
-        File[] input = null;
+        File[] files = null;
         File output = null;
         String dir = null;
         String file = null;
 
         if (args.containsOption(ARG_DIR)) {
             dir = args.getOptionValues(ARG_DIR).get(0);
-            input = Utils.getFilesInDirectory(dir, ".xls", ".xlsx");
+            files = Utils.getFilesInDirectory(dir, ".xls", ".xlsx");
         } else if (args.containsOption(ARG_FILE)) {
             file = args.getOptionValues(ARG_FILE).get(0);
-            input = new File[]{new File(file)};
+            files = new File[]{new File(file)};
         }
 
-        if (input == null || input.length == 0) {
+        if (files == null || files.length == 0) {
             if (dir != null) {
                 printUsageExample(ARG_DIR);
             } else if (file != null) {
@@ -68,22 +68,26 @@ public class SpringBootConsoleApplication implements ApplicationRunner {
             }
             return;
         }
+        out("Files:\n" + Arrays.stream(files).map(File::getAbsolutePath).reduce((s1, s2) -> s1 + "\n" + s2).orElse(""));
 
         List<String> searchItems = args.getOptionValues(ARG_SEARCH);
 
         if (searchItems == null || searchItems.isEmpty()) {
-            printUsageExample(ARG_SEARCH);
-            return;
+            //printUsageExample(ARG_SEARCH);
+            //return;
+            searchItems = new ArrayList<>();
         }
+        out("Search: " + searchItems.stream().reduce((s1, s2) -> s1 + ", " + s2).orElse("<empty>"));
 
         if (args.containsOption(ARG_OUT)) {
             output = new File(args.getOptionValues(ARG_OUT).get(0));
         } else {
             output = File.createTempFile("workbook", ".xlsx");
         }
+        out("Output file: " + output.getAbsolutePath());
 
         //ExcelPricesExtractor excelPricesExtractor = applicationContext.getBean(ExcelPricesExtractor.class);
-        excelPricesExtractor.start(input, output, searchItems);
+        excelPricesExtractor.start(files, output, searchItems);
 
         printIgnoredFiles(excelPricesExtractor.getFilesIgnored());
     }
